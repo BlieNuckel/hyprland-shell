@@ -5,11 +5,15 @@ import { separatorBetween } from "../../utils"
 import WorkspacePanelButton from "./WorkspacesPanelButton"
 import TimePanelButton from "./TimePanelButton"
 import NotifPanelButton from "./NotifPanelButton"
+import LauncherPanelButton from "./LauncherPanelButton"
 
 function Start() {
   return (
     <box $type="start">
-      {separatorBetween([WorkspacePanelButton()], Gtk.Orientation.VERTICAL)}
+      {separatorBetween(
+        [LauncherPanelButton(), WorkspacePanelButton()],
+        Gtk.Orientation.VERTICAL,
+      )}
     </box>
   )
 }
