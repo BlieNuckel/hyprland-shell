@@ -1,6 +1,6 @@
 import AstalApps from "gi://AstalApps?version=0.1"
 import options from "../options"
-import { createComputed, createState, For } from "gnim"
+import { createComputed, createState, For } from "ags"
 import app from "ags/gtk4/app"
 import { Gtk } from "ags/gtk4"
 import Pango from "gi://Pango?version=1.0"

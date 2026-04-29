@@ -3,8 +3,8 @@ import AstalNotifd from "gi://AstalNotifd"
 import { createBinding, createConnection, With } from "ags"
 import PanelButton from "../common/PanelButton"
 import { Gtk } from "ags/gtk4"
-
-const WINDOW_NAME = ""
+import { WINDOW_NAME } from "../notification/NotificationWindow"
+import app from "ags/gtk4/app"
 
 const notifd = AstalNotifd.get_default()
 const dndBind = createBinding(notifd, "dontDisturb")
@@ -41,7 +41,10 @@ export default function NotifPanelButton() {
   const notifications = createBinding(notifd, "notifications")
 
   return (
-    <PanelButton window={WINDOW_NAME} onClicked={() => {}}>
+    <PanelButton
+      window={WINDOW_NAME}
+      onClicked={() => app.toggle_window(WINDOW_NAME)}
+    >
       <With value={notifications}>
         {(notifs) =>
           notifs.length == 0 ? (

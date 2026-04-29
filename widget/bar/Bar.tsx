@@ -1,6 +1,6 @@
 import app from "ags/gtk4/app"
 import { Astal, Gtk, Gdk } from "ags/gtk4"
-import { onCleanup } from "gnim"
+import { onCleanup } from "ags"
 import { separatorBetween } from "../../utils"
 import WorkspacePanelButton from "./WorkspacesPanelButton"
 import TimePanelButton from "./TimePanelButton"
@@ -30,7 +30,11 @@ function Center() {
 }
 
 function End() {
-  return <box $type="end">{separatorBetween([], Gtk.Orientation.VERTICAL)}</box>
+  return (
+    <box $type="end">
+      {separatorBetween([NotifPanelButton()], Gtk.Orientation.VERTICAL)}
+    </box>
+  )
 }
 
 type BarProps = JSX.IntrinsicElements["window"] & {
@@ -39,7 +43,7 @@ type BarProps = JSX.IntrinsicElements["window"] & {
 
 export default function Bar({ gdkmonitor, ...props }: BarProps) {
   let win: Astal.Window
-  const { TOP } = Astal.WindowAnchor
+  const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
   const anc = TOP
 
   onCleanup(() => {
@@ -56,7 +60,7 @@ export default function Bar({ gdkmonitor, ...props }: BarProps) {
       name={"bar"}
       namespace={"bar"}
       gdkmonitor={gdkmonitor}
-      anchor={anc}
+      anchor={anc | LEFT | RIGHT}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
       application={app}
       {...props}
